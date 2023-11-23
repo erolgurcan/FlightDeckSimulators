@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+This file is used by the publish/package process of your Web project. You can customize the behavior of this process
+by editing this MSBuild file. In order to learn more about this please visit https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project>
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAA10o75h5m6UScnOrDq7PVYAAAAAACAAAAAAAQZgAAAAEAACAAAACJZ+J1augGQSY4sj25jM7uOL113xoUu1Nw4aRttAFQMwAAAAAOgAAAAAIAACAAAAAupzziHdnwzLPZHNqEkSOd3vfcXvdFdIblQ1cqbPsjaIAAAABsXqhdFphdB9Gyk+izlI4k0EWD87z3TeBz5kIW3Jtwj8zdn8TaVnS5vjjEOsb6TuLSDDBvq8b4hn82c02NbfIm33llK7/bpM+GppKTUrm1Q4Mi4QM3YV95GwTTNk2NFVe5fIrmipMFBRYu9X1sn2BStFtSNG5N7z78dJw9tIUO70AAAADmmH6Z9c+j14YeHPOLn1w0r1O0NjB7XKOCXPfRfIOLLKFVFVQPbFKtR1tdv8LwcCHd8s6YlnDO5Jb/OCzrNZK4</EncryptedPassword>
+    <History>True|2023-11-11T06:36:13.5516600Z;</History>
+    <LastFailureDetails />
+  </PropertyGroup>
+  <ItemGroup>
+    <DestinationConnectionStrings Include="FlightDB">
+      <Value>Server=tcp:flight-database.database.windows.net,1433%3bInitial Catalog=flight-database%3bPersist Security Info=False%3bUser ID=erol%3bPassword=Kurqotus34.%3bMultipleActiveResultSets=False%3bEncrypt=True%3bTrustServerCertificate=False%3bConnection Timeout=30%3b</Value>
+    </DestinationConnectionStrings>
+  </ItemGroup>
+</Project>
