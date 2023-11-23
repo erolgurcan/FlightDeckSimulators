@@ -1,0 +1,30 @@
+.red-border {
+  border: 2px solid red;
+}
+
+.active-flight {
+  animation: blink 3s linear infinite;
+  color: #ff0000;
+  font-weight: 900;
+}
+
+@keyframes blink {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.hover-move {
+  position: relative;
+  transition: transform 0.3s ease;
+}
+
+.hover-move:hover {
+  transform: translate(0, -10px);
+}

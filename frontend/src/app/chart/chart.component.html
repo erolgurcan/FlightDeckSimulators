@@ -1,0 +1,85 @@
+<div>
+  <div class="mt-2">
+    <button
+      (click)="onLive()"
+      type="button"
+      class="btn btn-primary m-2 p-2"
+      [disabled]="!selectedFlight.isActive"
+    >
+      Live Data
+    </button>
+
+    <h4
+      class="text-center text text-danger"
+      [ngClass]="{
+        blink: toggleLiveData
+      }"
+    >
+      <strong>{{
+        toggleLiveData == true ? " ● Live data enabled" : "Live data disabled"
+      }}</strong>
+    </h4>
+  </div>
+  <div class="card text-center drop-shadow mb-4">
+    <h5 class="text-secondary">Altitude - Feet</h5>
+    <ngx-charts-line-chart
+      class="m-auto"
+      [results]="dataset"
+      [view]="[600, 250]"
+      [xAxis]="true"
+      [yAxis]="true"
+      [showGridLines]="true"
+      [autoScale]="false"
+      [legendPosition]="legendPosition"
+      [rangeFillOpacity]="0.4"
+    >
+    </ngx-charts-line-chart>
+  </div>
+
+  <div class="card text-center drop-shadow mb-4" *ngIf="!toggleLiveData">
+    <h5 class="text-secondary">True Speed</h5>
+    <ngx-charts-line-chart
+      class="m-auto"
+      [results]="datasetSpeed"
+      [view]="[600, 250]"
+      [xAxis]="true"
+      [yAxis]="true"
+      [showGridLines]="true"
+      [autoScale]="true"
+      [legendPosition]="legendPosition"
+      [rangeFillOpacity]="0.4"
+    >
+    </ngx-charts-line-chart>
+  </div>
+  <div *ngIf="toggleLiveData">
+    <div class="card mt-2">
+      <div class="row">
+        <ngx-charts-bar-vertical
+          class="col-lg-6"
+          [view]="[300, 250]"
+          [results]="engine"
+          [gradient]="true"
+           [xAxis]="true"
+          [yAxis]="true"
+          [roundEdges]="true"
+          [yScaleMax] = "1"
+
+          
+        >
+        </ngx-charts-bar-vertical>
+
+        <ngx-charts-gauge
+          class="col-lg-6"
+          [view]="[300, 250]"
+          [results]="speed"
+          [legendPosition]="legendPosition"
+        >
+        </ngx-charts-gauge>
+      </div>
+    </div>
+    <div class="card mt-2">
+      <ngx-charts-number-card [view]="[600, 250]" [results]="single">
+      </ngx-charts-number-card>
+    </div>
+  </div>
+</div>

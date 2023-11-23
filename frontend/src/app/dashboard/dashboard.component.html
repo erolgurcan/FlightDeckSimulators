@@ -1,0 +1,189 @@
+<div class="m-4">
+  <div id="content-wrapper" className="d-flex flex-column w-100 mt-4">
+    <div class="mt-4">
+      <div className="container-fluid pt-4 mt-4 ">
+        <div
+          className="d-sm-flex mt-2 align-items-center justify-content-between mb-4"
+        >
+          <h1 className="ml-4 text-gray-800">Flight Dashboard</h1>
+        </div>
+      </div>
+    </div>
+
+    <!-- Navbar -->
+
+    <div class="card text-center m-4">
+      <div class="card-header">
+        <ul class="nav nav-tabs card-header-tabs">
+          <li class="nav-item">
+            <a class="nav-link active" (click)="toogleSelectedFlight()"
+              >Flights
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link disabled" href="#">User Settings</a>
+          </li>
+          <li class="nav-item ml-auto">
+            <a class="navbar-brand text-primary" [routerLink]="['/']"
+              ><fa-icon [icon]="faHouse"></fa-icon> Home</a
+            >
+
+            <a class="navbar-brand text-primary" [routerLink]="['/']" (click)="logout()"
+            ><fa-icon [icon]="faArrow"></fa-icon> Logout</a
+          >
+          </li>
+        </ul>
+      </div>
+
+      <div class="row">
+        <div
+          class="col-lg-3"
+          style="border-right: 1px solid rgb(231, 231, 231); border-radius: 2px"
+        >
+          <h3 class="mt-4">Pilot Profile</h3>
+          <select
+            #pilotSelect
+            class="form-select"
+            aria-label="Default select"
+            name="pilotProfile"
+            (change)="pilotSelectHandler(pilotSelect.value)"
+          >
+            <option *ngFor="let pilot of pilotProfile" [value]="pilot.pilotId">
+              {{ pilot.pilotName }}
+            </option>
+          </select>
+
+          <div class="card text-center mt-5">
+            <div class="card-header"><h3>Erol Gurcan</h3></div>
+            <div class="card-body">
+              <h5 class="card-title">Captain Pilot</h5>
+              <img
+                style="max-width: 200px"
+                src="../../assets/logo/captainlogo.jpg"
+              />
+              <ul class="list-group">
+                <li class="list-group-item disabled" aria-disabled="true">
+                  Total Flight Hours: <strong>10,000 hours</strong>
+                </li>
+                <li class="list-group-item">
+                  <strong>Current Airliner:</strong>
+                  <img
+                    style="max-width: 200px"
+                    src="../../assets/logo/westjet.jpeg"
+                  />
+                </li>
+                <li class="list-group-item">
+                  <strong>Current Airplane:</strong>
+                  <img src="../../assets/logo/boeing.png" />
+                </li>
+              </ul>
+            </div>
+            <div class="card-footer text-muted">Last Flight 2 days ago</div>
+          </div>
+        </div>
+        <div
+          class="col-lg-9"
+          style="border-left: 1px solid rgb(231, 231, 231); border-radius: 2px"
+        >
+          <!-- User Stats  -->
+
+          <!-- Dashboard Header  -->
+          <div class="card-body">
+            <h3 class="card-title" *ngIf="!isShowDashboard">Your Flights</h3>
+            <div class="col-lg-4" *ngIf = "!isShowDashboard" >
+              <form t class="d-flex" role="search">
+                <input
+                  #flightCodeInput
+                  class="form-control me-2"
+                  type="search"
+                  placeholder="Search Flight Code"
+                  aria-label="Search"
+                />
+                <button
+                  class="btn btn-outline-success"
+                  (click)="filterFlights()"
+                >
+                  Search
+                </button>
+              </form>
+            </div>
+
+            <div
+              class="p-2 text-center d-flex flex-wrap justify-center m-auto"
+              *ngIf="!isShowDashboard"
+            >
+              <div
+                class="card m-2 col-lg-4 select-card-hover drop-shadow hover-move"
+                *ngFor="let flight of flightInfo"
+                style="width: 18rem"
+                (click)="selectItem(flight)"
+                [ngClass]="{ 'red-border': flight.isActive }"
+              >
+                <img
+                  class="card-img-top"
+                  src="../../assets/airplane_images/low-resolution/card_airplane_1.png"
+                  alt="Card image cap"
+                />
+                <div class="card-body">
+                  <h1 class="card-title">
+                    Flight:
+                    <p class="text-primary">{{ flight.flightCode }}</p>
+                  </h1>
+                  <p class="card-text">
+                    <strong>Departure:</strong>
+                    {{ flight.departureAirportCode }} <strong>Arival:</strong>
+                    {{ flight.arivalAirportCode }}
+                    <strong>Departed Date: </strong>
+                    {{
+                      flight.departureDateHour | date : "dd/MM/yyyy hh:mm:ss a"
+                    }}
+                  </p>
+                  <p *ngIf="flight.isActive" class="active-flight">
+                    Active Flight!
+                  </p>
+                  <div class="d-flex flex-column justify-center m-auto">
+                    <img
+                      style="max-width: 100px"
+                      class="m-auto"
+                      src="../../assets/logo/westjet.jpeg"
+                    />
+                    <img
+                      style="max-width: 100px"
+                      class="m-auto"
+                      src="../../assets/logo/boeing.png"
+                    />
+                    <p>737-800</p>
+                  </div>
+
+                  <a
+                    class="btn btn-primary text-light"
+                    (click)="selectItem(flight)"
+                    >See Flight Details</a
+                  >
+                </div>
+              </div>
+            </div>
+
+            <div class="scrollable-content" style="min-height: 850px">
+              <div class="row p-4" *ngIf="isShowDashboard">
+                <div class="col-lg-6 drop-shadow" style="min-height: 800px">
+                  <app-map
+                    class="drop-shadow"
+                    [selectedFlight]="selectedFlight"
+                    [isShowDashboard]="isShowDashboard"
+                  ></app-map>
+                </div>
+                <div class="col-lg-6 drop-shadow">
+                  <app-chart
+                    [selectedFlight]="selectedFlight"
+                    [isShowDashboard]="isShowDashboard"
+                  ></app-chart>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
