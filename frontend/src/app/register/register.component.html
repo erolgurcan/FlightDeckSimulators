@@ -1,0 +1,44 @@
+<app-navbar></app-navbar>
+<div class="login-background">
+
+
+  <div class="login-box">
+    <div class="text-center mb-4"><img width="200px" src="../../assets/logo/logo.png" /></div>
+    <h3 class="mt-4 text-center">Register</h3>
+    <form (ngSubmit)="submitForm(taskNForm)" #taskNForm="ngForm">
+      <div class="user-box">
+        <input required [(ngModel)]="userName" type="text" name="username" />
+        <label>Username</label>
+      </div>
+      <div class="user-box">
+        <input required [(ngModel)]="userEmail" type="text" name="userEmail" />
+        <label>E-mail</label>
+      </div>
+      <div class="user-box">
+        <input
+          required
+          [(ngModel)]="password"
+          #ctrlPassword="ngModel"
+          type="password"
+          name="password"
+        />
+        <label>Password</label>
+      </div>
+      
+      <div class="btn-container text-center">
+        <button class="btn btn-primary">Submit</button>
+        <div>
+          <!-- <p *ngIf=" ctrlPassword.invalid && ctrlPassword.touched" >Password is required</p> -->
+        </div>
+      </div>
+    </form>
+  </div>
+  <ngx-spinner
+    bdColor="rgba(51,51,51,0.8)"
+    size="medium"
+    color="#fff"
+    type="ball-scale-multiple"
+  >
+    <p style="font-size: 20px; color: white">Loading...</p>
+  </ngx-spinner>
+</div>

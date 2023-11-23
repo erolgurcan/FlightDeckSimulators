@@ -1,0 +1,98 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background-color: #eee;
+}
+
+.login-box {
+  width: 400px;
+  height: 600px;
+  background: rgba(255, 255, 255, 0.507);
+  color: #333;
+  top: 50%;
+  left: 50%;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  box-sizing: border-box;
+  padding: 70px 30px;
+  border-radius: 20px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+}
+
+h2 {
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  font-size: 22px;
+}
+
+.login-box form {
+  margin-top: 30px;
+}
+
+.login-box form .user-box {
+  position: relative;
+}
+
+.login-box form .user-box input {
+  width: 100%;
+  padding: 10px 0;
+  font-size: 16px;
+  margin-bottom: 30px;
+  border: none;
+  border-bottom: 1px solid #ccc;
+  outline: none;
+  background: transparent;
+}
+
+.login-box form .user-box label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 10px 0;
+  font-size: 16px;
+  color: #333;
+  pointer-events: none;
+  transition: 0.5s;
+}
+
+.login-box form .user-box input:focus ~ label,
+.login-box form .user-box input:valid ~ label {
+  top: -20px;
+  left: 0;
+  color: #00bcd4;
+  font-size: 12px;
+}
+
+.login-box form a {
+  text-decoration: none;
+  font-size: 12px;
+  line-height: 20px;
+  color: darkgrey;
+}
+
+.login-box button {
+  margin-top: 40px;
+  margin: auto;
+  border: none;
+  outline: none;
+  height: 40px;
+  color: #fff;
+  font-size: 18px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+.login-box button:hover {
+  background: #005d6b;
+  flex-shrink: 3;
+}
+
+.login-background {
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.7) 75%, #000 100%), url("../../assets/backgroup-images/register-page-background.jpg");
+  background-size: cover;
+  background-position: center;
+  min-height: 100vh;
+}
