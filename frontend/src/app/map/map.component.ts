@@ -45,7 +45,7 @@ export class MapComponent implements AfterViewInit, OnInit, OnDestroy {
   baseLayers : any;
 
 
-  private initMap(): void {
+  public initMap(): void {
     this.map = L.map('map', {
       center: [39.8282, -98.5795],
       zoom: 4,
