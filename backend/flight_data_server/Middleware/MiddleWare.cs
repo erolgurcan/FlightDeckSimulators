@@ -24,13 +24,20 @@ public class RequestLoggingMiddleware
 
         HttpContext ctx = context;
 
-        if (String.IsNullOrEmpty(context.Request.Headers["Authorization"]))
+        var token = context.Request.Headers["Authorization"];
+
+        if (String.IsNullOrEmpty(context.Request.Headers["Authorization"])
+            || context.Request.Headers["Authorization"] == "null"
+            )
             {
             _logger.LogError($"Missing JWT Token Header: JWT)");
+
             }
         else
             {
-            var JWT = context.Request.Headers["Authorization"];
+            string JWT = context.Request.Headers["Authorization"];
+            if (JWT == "null") JWT = null;
+            //if (JWT == "null") await _next(context);
             var principal = ExtractClaimsPrincipal(JWT);
             context.User = principal;
             }

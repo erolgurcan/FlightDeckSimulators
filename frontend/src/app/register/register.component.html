@@ -27,11 +27,14 @@
       
       <div class="btn-container text-center">
         <button class="btn btn-primary">Submit</button>
-        <div>
-          <!-- <p *ngIf=" ctrlPassword.invalid && ctrlPassword.touched" >Password is required</p> -->
-        </div>
+
       </div>
+
     </form>
+    <div>
+      <p style="font-weight: 700; color: white; margin-top: 30px;" *ngIf="!isPasswordValid" >{{errorMessage}}</p>
+      
+    </div>
   </div>
   <ngx-spinner
     bdColor="rgba(51,51,51,0.8)"
@@ -41,4 +44,5 @@
   >
     <p style="font-size: 20px; color: white">Loading...</p>
   </ngx-spinner>
+
 </div>

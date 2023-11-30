@@ -9,6 +9,9 @@ using System.Text.RegularExpressions;
 using Microsoft.AspNetCore.Authorization;
 using flight_data_server.Database;
 using System.Security.Claims;
+using System.IdentityModel.Tokens.Jwt;
+using System.Data;
+using Microsoft.IdentityModel.Tokens;
 
 namespace flight_data_server.Controllers
     {
@@ -43,15 +46,6 @@ namespace flight_data_server.Controllers
 
                 var user = _context.HttpContext.User;
 
-                bool isUser = IsUser(user);
-                bool isAdmin = IsAdmin(user);
-
-                if (!(isUser || isAdmin))
-                    {
-                    return Unauthorized();
-                    }
-
-
                 var loginResponse = await _userRepo.Login(model);
 
                 if (loginResponse.User == null || string.IsNullOrEmpty(loginResponse.Token))
@@ -63,9 +57,33 @@ namespace flight_data_server.Controllers
                     return Ok(_response);
                     }
 
+                var claims = new[]
+{
+            new Claim(JwtRegisteredClaimNames.Sub, model.UserName),
+            new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+            new Claim("role", "user")
+
+        };
+
+                var key = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes("this is my custom Secret key for authentication"));
+
+                var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+
+                var token = new JwtSecurityToken(
+    issuer: "your_issuer",   // Replace with your actual issuer
+    audience: "your_audience", // Replace with your actual audience
+    claims: claims,
+    expires: DateTime.Now.AddMinutes(30), // Set token expiration time
+    signingCredentials: creds
+);
+
+                var tokenString = new JwtSecurityTokenHandler().WriteToken(token);
+
                 _response.StatusCode = HttpStatusCode.OK;
                 _response.IsSuccess = true;
                 _response.Result = loginResponse;
+                loginResponse.Token = tokenString;
+
                 return Ok(_response);
                 }
             catch (Exception e)
@@ -82,13 +100,6 @@ namespace flight_data_server.Controllers
 
             var userxtx = _context.HttpContext.User;
 
-            bool isUser = IsUser(userxtx);
-            bool isAdmin = IsAdmin(userxtx);
-
-            if (!(isUser || isAdmin))
-                {
-                return Unauthorized();
-                }
 
             Regex pattern = new Regex("^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]{8,}$");
 
@@ -110,6 +121,7 @@ namespace flight_data_server.Controllers
                 }
 
             var user = await _userRepo.Register(model);
+
             if (user == null)
                 {
                 _response.StatusCode = HttpStatusCode.BadRequest;
@@ -117,6 +129,7 @@ namespace flight_data_server.Controllers
                 _response.ErrorMessage.Add("Error while registering");
                 return BadRequest(_response);
                 }
+            _response.Result = user;
             _response.StatusCode = HttpStatusCode.OK;
             _response.IsSuccess = true;
             return Ok(_response);
@@ -127,16 +140,16 @@ namespace flight_data_server.Controllers
         public async Task<IActionResult> GetPilotProfile([FromHeader] int userID)
             {
 
-            _logger.LogInformation("Get Pilot Profile");
+            //_logger.LogInformation("Get Pilot Profile");
 
-            if (userID == null)
-                {
+            //if (userID == null)
+            //    {
 
-                _response.StatusCode = System.Net.HttpStatusCode.BadRequest;
-                _response.IsSuccess = false;
-                _response.ErrorMessage.Add("User ID not specified");
-                return BadRequest(_response);
-                }
+            //    _response.StatusCode = System.Net.HttpStatusCode.BadRequest;
+            //    _response.IsSuccess = false;
+            //    _response.ErrorMessage.Add("User ID not specified");
+            //    return BadRequest(_response);
+            //    }
 
             var result = _userDBCtx.UserData.Join(
 

@@ -101,11 +101,12 @@ class PythonInterface:
         "departureAirportCode": "KSEA",
         "airplaneModel": "737-800",
         "tailNumber": "N3753",
-        "pilotID": 5
+        "pilotID": 12
         }
 
         headers = {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJlcm9sMUBlcm9sMSIsImp0aSI6ImZhNGVmMTAwLTE4OTktNDRkZi05ZjlhLTdiZGVjYjZmYzkwMiIsInJvbGUiOiJ1c2VyIiwiZXhwIjoxNzAxMTU2ODk2LCJpc3MiOiJ5b3VyX2lzc3VlciIsImF1ZCI6InlvdXJfYXVkaWVuY2UifQ.asJ2XjmTTIL42W_kw8rqjcnL7nFThVaH2puPEES-Ufw'
         }
 
         if re.match("^[A-Z]{2,}", flightCode) and self.cnt == 0 :        

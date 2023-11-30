@@ -34,19 +34,12 @@ export class LoginComponent implements OnInit {
   }
 
   authorize() {
-    if (localStorage.getItem('userToken')) {
-      let localToken: string | undefined = localStorage
-        .getItem('userToken')
-        ?.toString();
-      this.authService.authorize(localToken).subscribe((d) => {
-        this.isRouting = true;
-        if (d.isSuccess) {
-          setTimeout(() => {
-            this.isRouting = false;
-            this.router.navigate(['dashboard']);
-          }, 3000);
-        }
-      });
+    if (localStorage.getItem('userToken')  ) {
+      this.isRouting = true;
+      setTimeout(() => {
+
+        this.router.navigate(['dashboard']);
+      }, 4000);
     }
   }
 

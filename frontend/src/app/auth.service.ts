@@ -11,6 +11,9 @@ export class AuthService {
 
   constructor( private apiService: Apiservice) { }
 
+  register(username:string, email:string, password: string):Observable<any>{
+    return  this.apiService.register(username, email, password);
+  }
 
   login (username: string, password: string):Observable<any>{
       return this.apiService.login(username, password);

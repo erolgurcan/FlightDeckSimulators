@@ -106,7 +106,20 @@ namespace flight_data_server.Services.UserFunctions
                     };
 
                 _db.UserData.Add(user);
-                _db.SaveChangesAsync();
+                _db.SaveChanges();
+
+                var userReturn = _db.UserData.FirstOrDefault(u => u.UserName == user.UserName);
+
+                if(userReturn != null )
+                    {
+                    PilotProfileModel pilot = new() { PilotProfileName = user.UserName, UserProfileID = userReturn.UserId, PilotRating = "FO" };
+
+                    _db.PilotProfile.Add(pilot);
+
+                    }
+
+
+                _db.SaveChanges();
 
                 user.Password = "";
 
@@ -119,5 +132,5 @@ namespace flight_data_server.Services.UserFunctions
             }
         }
 
-        
+
     }

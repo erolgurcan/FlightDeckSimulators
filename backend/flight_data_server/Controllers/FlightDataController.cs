@@ -82,10 +82,11 @@ namespace flight_data_server.Controllers
                 bool isUser = IsUser(user);
                 bool isAdmin = IsAdmin(user);
 
-                if (!( isAdmin))
+                if (!(isUser || isAdmin))
                     {
                     return Unauthorized();
                     }
+
 
                 IEnumerable<FlightInfo> flightList = await _dbFlightInfo.GetAllAsync(d => d.PilotID == pilotID);
                 _response.Result = flightList;

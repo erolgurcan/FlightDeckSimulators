@@ -5,7 +5,7 @@
   </PropertyGroup>
   <PropertyGroup>
     <ActiveDebugProfile>flight_data_server</ActiveDebugProfile>
-    <NameOfLastUsedPublishProfile>D:\.NET\Flight-Data-Server-Asp.Net\flight_data_server\Properties\PublishProfiles\flight-data-server - Web Deploy1.pubxml</NameOfLastUsedPublishProfile>
+    <NameOfLastUsedPublishProfile>E:\OneDrive - Douglas College\CSIS4495\Repo\FlightDeckSimulators\backend\flight_data_server\Properties\PublishProfiles\flight-data-server - Web Deploy2.pubxml</NameOfLastUsedPublishProfile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <DebuggerFlavor>ProjectDebugger</DebuggerFlavor>
